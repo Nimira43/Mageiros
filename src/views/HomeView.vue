@@ -1,44 +1,41 @@
 <template>
   <main class="main-container">
-    <h1>Home</h1>
-    <nav>
+    <div>
+      <input 
+        type="text"
+        placeholder="Search recipes..."
+        v-model="recipeStore.searchQuery"
+      >
+    </div>
+    <nav v-if="recipeStore.filteredRecipes.length > 0">
       <ul>
-        <li>
+        <li 
+          v-for="recipe in recipeStore.filteredRecipes"
+          :key="recipe.id"  
+        >
           <RouterLink 
             :to="{
               name: 'recipe',
-              params: {id: 1}
+              params: {id: recipe.id}
             }"
           >
-            Recipe 1
-          </RouterLink>
-        </li>
-        <li>
-          <RouterLink 
-            :to="{
-              name: 'recipe',
-              params: {id: 2}
-            }"
-          >
-            Recipe 2
+            {{  recipe.name }}
           </RouterLink>
         </li>
       </ul>
     </nav>
+    <div v-else>
+      <p>No recipes found</p>
+    </div>
   </main>
 </template>
 
 <script setup lang="ts">
-  import { useRecipeStore } from '@/stores/recipe'
-  import { RouterLink } from 'vue-router'
 
-  const recipeStore = useRecipeStore()
+import { useRecipeStore } from '@/stores/recipe'
+import { RouterLink } from 'vue-router'
 
+const recipeStore = useRecipeStore()
 
 </script>
 
-<style scoped>
-  .main-container {
-    padding: 2.5rem;
-  }
-</style>
