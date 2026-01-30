@@ -4,13 +4,13 @@
       <input 
         type="text"
         placeholder="Search recipes..."
-        v-model="recipeStore.searchQuery"
+        v-model="searchQuery"
       >
     </div>
-    <nav v-if="recipeStore.filteredRecipes.length > 0">
+    <nav v-if="filteredRecipes.length > 0">
       <ul>
         <li 
-          v-for="recipe in recipeStore.filteredRecipes"
+          v-for="recipe in filteredRecipes"
           :key="recipe.id"  
         >
           <RouterLink 
@@ -31,11 +31,14 @@
 </template>
 
 <script setup lang="ts">
-
-import { useRecipeStore } from '@/stores/recipe'
+import { computed, ref } from 'vue'
+import { useRecipeStore } from '../stores/recipe'
 import { RouterLink } from 'vue-router'
 
 const recipeStore = useRecipeStore()
-
+const searchQuery = ref('')
+const filteredRecipes = computed(
+  () => recipeStore.filteredRecipes(searchQuery.value)
+)
 </script>
 

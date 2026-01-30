@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 
-import { useRecipeStore } from '@/stores/recipe'
+import { useRecipeStore } from '../stores/recipe'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
