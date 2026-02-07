@@ -19,7 +19,7 @@
               params: {id: recipe.id}
             }"
           >
-            {{  recipe.name }}
+            {{ recipe.name }}
           </RouterLink>
         </li>
       </ul>
