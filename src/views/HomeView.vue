@@ -1,5 +1,6 @@
 <template>
   <main class="main-container">
+    
     <div>
       <input 
         type="text"
@@ -7,6 +8,7 @@
         v-model="searchQuery"
       >
     </div>
+    
     <nav v-if="filteredRecipes.length > 0">
       <ul>
         <li 
@@ -24,9 +26,12 @@
         </li>
       </ul>
     </nav>
+    
     <div v-else>
       <p>No recipes found</p>
     </div>
+
+
   </main>
 </template>
 
