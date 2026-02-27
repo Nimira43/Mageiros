@@ -1,6 +1,6 @@
 <template>
-  <h1>Add Recipe</h1>
-  <form @submit.prevent="addRecipe">
+  <h1>Edit Recipe</h1>
+  <form @submit.prevent="updateRecipe">
     <div>
       <input 
         placeholder="Recipe name..."
@@ -22,23 +22,39 @@
 
 <script setup lang="ts">
 import { useRecipeStore } from '../stores/recipe'
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { onMounted, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
 const store = useRecipeStore()
+const router = useRouter()
+const route = useRoute()
 const name = ref('')
 const description = ref('')
-const router = useRouter()
 
-const addRecipe = () => {
-  const recipe = store.addRecipe({
+const fetchRecipe = () => {
+  const id = route.params.id as string
+  const recipe = store.getRecipeById(id)
+
+  if (recipe) {
+    name.value = recipe.name
+    description.value = recipe.description
+  } else {
+    router.push({ name: 'not-found'})
+  }
+} 
+
+onMounted(fetchRecipe)
+
+const updateRecipe = () => {
+  store.editRecipe({
+    id: route.params.id as string,
     name: name.value,
     description: description.value
   })
   router.push({
     name: 'recipe',
     params: {
-      id: recipe.id
+      id: route.params.id as string
     }
   })
 }
