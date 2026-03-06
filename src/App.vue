@@ -1,77 +1,46 @@
 <template>
-  <header class="header-container">
-    <div class="logo-wrapper">
-      <h1 class="logo">Mageiros</h1>
-    </div>
-    <nav class="nav-wrapper">
-      <ul>
+  <header class="bg-amber-600 text-white shadow-md">
+    <nav class="max-w-6xl mx-auto flex items-center justify-between py-6 px-4">
+      <h1 class="logo text-3xl font-bold tracking-wide">
+        Mageiros
+      </h1>
+      <ul class="flex items-center gap-8 text-lg uppercase font-medium">
         <li>
           <RouterLink
             :to="{ name: 'home' }"
+            class="hover:text-black hover-transition"
           >
             Home
           </RouterLink>
         </li>
+
         <li>
           <RouterLink
             :to="{ name: 'favourites' }"
+            class="hover:text-black hover-transition"
           >
             Favourites
           </RouterLink>
         </li>
+
         <li>
           <RouterLink
             :to="{ name: 'add-recipe' }"
+            class="hover:text-black hover-transition"
           >
             Add Recipe
           </RouterLink>
         </li>
       </ul>
+
     </nav>
   </header>
 
-  <RouterView />
+  <main class="bg-amber-50 min-h-screen p-4">
+    <RouterView />
+  </main>
 </template>
 
-<script setup lang='ts'>
-
+<script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-
 </script>
-
-<style scoped>
-  .header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-    background-color: #b1f1a3;
-    padding: 0.75rem 2rem;
-  }
-
-  .logo-wrapper {
-    display: flex;
-    align-items: center;
-  }
-
-  .logo {
-    color: #111;
-  }
-  .nav-wrapper ul {
-    display: flex;
-    gap: 1.5rem; 
-  }
-
-  .nav-wrapper ul li a {
-    color: #111;
-    font-weight: 400;
-    letter-spacing: 0.5px;
-    transition: opacity 0.2s ease;
-  }
-
-  .nav-wrapper ul li a:hover {
-    opacity: 0.75;
-  }
-
-</style>
-
